@@ -1,10 +1,10 @@
 import express from 'express';
 import {GetAllContactsUseCase} from "../../domain/interfaces/use-cases/contact/get-all-contacts";
-import {CreateContactUseCase} from "../../domain/interfaces/use-cases/contact/create-contact";
+import {CreateContactsUseCase} from "../../domain/interfaces/use-cases/contact/create-contact";
 
 export default function ContactsRouter(
     getAllContactsUseCase: GetAllContactsUseCase,
-    createContactUseCase: CreateContactUseCase,
+    createContactsUseCase: CreateContactsUseCase,
 ) {
     const router = express.Router();
 
@@ -19,7 +19,7 @@ export default function ContactsRouter(
 
     router.post("/", async (req, res) => {
         try {
-            await createContactUseCase.execute(req.body);
+            await createContactsUseCase.execute(req.body);
             res.statusCode = 201;
             res.json({ message: "Created" });
         } catch (error) {

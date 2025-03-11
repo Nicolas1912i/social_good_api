@@ -9,8 +9,8 @@ export class ContactRepositoryImpl implements ContactRepository {
         this.contactDataSource = contactDataSource;
     }
 
-    async createContact(contact: Contact): Promise<boolean> {
-        return await this.contactDataSource.create(contact);
+    async createCollection(contacts: Contact[]): Promise<boolean> {
+        return await this.contactDataSource.createCollection(contacts);
     }
 
     async getContacts(): Promise<Contact[]> {
