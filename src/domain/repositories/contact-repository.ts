@@ -1,6 +1,6 @@
 import {ContactRepository} from "../interfaces/repositories/contact-repository";
 import {ContactDataSource} from "../../data/interfaces/data-sources/contact-data-source";
-import {Contact} from "../entities/contact";
+import {CreateImportJSONActivityRequestImportDataInner, GetContactById200Response} from "ctct-api-client";
 
 export class ContactRepositoryImpl implements ContactRepository {
     contactDataSource: ContactDataSource;
@@ -9,11 +9,11 @@ export class ContactRepositoryImpl implements ContactRepository {
         this.contactDataSource = contactDataSource;
     }
 
-    async createCollection(contacts: Contact[]): Promise<boolean> {
-        return await this.contactDataSource.createCollection(contacts);
+    async createCollection(contacts: Array<CreateImportJSONActivityRequestImportDataInner>, accessToken: string): Promise<string> {
+        return await this.contactDataSource.createCollection(contacts, accessToken);
     }
 
-    async getContacts(): Promise<Contact[]> {
-        return await this.contactDataSource.getAll();
+    async getContacts(accessToken: string): Promise<GetContactById200Response[]> {
+        return await this.contactDataSource.getAll(accessToken);
     }
 }

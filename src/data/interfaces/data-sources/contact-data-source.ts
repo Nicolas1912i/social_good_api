@@ -1,6 +1,6 @@
-import {Contact} from "../../../domain/entities/contact";
+import {CreateImportJSONActivityRequestImportDataInner, GetContactById200Response} from "ctct-api-client";
 
 export interface ContactDataSource {
-    createCollection(contact: Contact[]): Promise<boolean>;
-    getAll(): Promise<Contact[]>;
+    createCollection(contact: Array<CreateImportJSONActivityRequestImportDataInner>, accessToken: string): Promise<string>;
+    getAll(accessToken: string): Promise<GetContactById200Response[]>;
 }

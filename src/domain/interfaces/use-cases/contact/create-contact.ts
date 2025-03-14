@@ -1,5 +1,5 @@
-import {Contact} from "../../../entities/contact";
+import {CreateImportJSONActivityRequestImportDataInner} from "ctct-api-client";
 
 export interface CreateContactsUseCase {
-    execute(contact: Contact[]): Promise<boolean>;
+    execute(contact: Array<CreateImportJSONActivityRequestImportDataInner>, accessToken: string): Promise<string>;
 }

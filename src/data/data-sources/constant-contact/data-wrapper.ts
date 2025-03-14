@@ -1,6 +1,6 @@
-import { Contact } from "../../../domain/entities/contact";
+import {CreateImportJSONActivityRequestImportDataInner} from "ctct-api-client";
 
 export interface DataWrapper {
-    getAll(): Promise<Contact[]>;
-    createCollection(contacts: Contact[]): Promise<boolean>;
+    getAll(): Promise<Array<CreateImportJSONActivityRequestImportDataInner>>;
+    createCollection(contacts: Array<CreateImportJSONActivityRequestImportDataInner>): Promise<boolean>;
 }

@@ -1,5 +1,5 @@
-import {Contact} from "../../../entities/contact";
+import {GetContactById200Response} from "ctct-api-client";
 
 export interface GetAllContactsUseCase {
-    execute(): Promise<Contact[]>;
+    execute(accessToken: string): Promise<GetContactById200Response[]>;
 }
