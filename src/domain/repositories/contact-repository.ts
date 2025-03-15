@@ -16,4 +16,8 @@ export class ContactRepositoryImpl implements ContactRepository {
     async getContacts(accessToken: string): Promise<GetContactById200Response[]> {
         return await this.contactDataSource.getAll(accessToken);
     }
+
+    async getUploadStatus(accessToken: string, activityId: string): Promise<string> {
+        return await this.contactDataSource.getUploadStatus(accessToken, activityId);
+    }
 }

@@ -2,10 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import {GetAllContactsUseCase} from "../../domain/interfaces/use-cases/contact/get-all-contacts";
 import {CreateContactsUseCase} from "../../domain/interfaces/use-cases/contact/create-contact";
+import {GetUploadStatusUseCase} from "../../domain/interfaces/use-cases/contact/get-upload-status";
 
 export default function ContactsRouter(
     getAllContactsUseCase: GetAllContactsUseCase,
     createContactsUseCase: CreateContactsUseCase,
+    getUploadStatusUseCase: GetUploadStatusUseCase
 ) {
     const router = express.Router();
 
@@ -44,6 +46,17 @@ export default function ContactsRouter(
             res.status(500).send({ message: "Error saving data", error: error });
         }
     });
+
+    router.get("/status", async (req, res) => {
+        const accessToken = req.query.access_token!.toString();
+        const activityId = req.query.activity_id!.toString();
+        try {
+            const status = await getUploadStatusUseCase.execute(accessToken, activityId);
+            res.status(200).send({status: status});
+        } catch (error) {
+            res.status(500).send({ message: "Error saving data", error: error });
+        }
+    })
 
     return router;
 }

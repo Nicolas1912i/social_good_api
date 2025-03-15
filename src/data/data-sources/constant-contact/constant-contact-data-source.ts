@@ -7,27 +7,15 @@ import {
 
 export class ConstantContactDataSource implements ContactDataSource {
 
-    private requireSegmentation(bytes: number): boolean {
-        const units = ['B', 'KB', 'MB', 'GB'];
-
-        let unitIndex = 0;
-
-        for (unitIndex; bytes > 1024; unitIndex++) {
-            bytes /= 1024;
-        }
-
-        return units[unitIndex] == 'MB' && bytes >= 4;
-    }
-
     private getConfiguration(accessToken: string): Configuration {
         return new Configuration({accessToken: accessToken});
     }
 
     async createCollection(contact: Array<CreateImportJSONActivityRequestImportDataInner>, accessToken: string): Promise<string> {
         const configuration = this.getConfiguration(accessToken);
-        const contactApi = new BulkActivitiesApi(configuration);
+        const bulkActivitiesApi = new BulkActivitiesApi(configuration);
         try {
-            const result = await contactApi.createImportJSONActivity({
+            const result = await bulkActivitiesApi.createImportJSONActivity({
                 import_data: contact,
                 list_ids: ["a2d739ee-fc29-11ef-bfc7-fa163ea51378"]
             });
@@ -41,10 +29,22 @@ export class ConstantContactDataSource implements ContactDataSource {
         const configuration = this.getConfiguration(accessToken);
         const contactApi = new ContactsApi(configuration);
         try {
-            const result = await contactApi.getAllContacts();
+            // @ts-ignore
+            const result = await contactApi.getAllContacts(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "street_addresses,phone_numbers", undefined, undefined, 500);
             return result.data.contacts!;
         } catch (error) {
             throw new Error("Failed to retrieve contacts");
+        }
+    }
+
+    async getUploadStatus(accessToken: string, activityId: string): Promise<string> {
+        const configuration = this.getConfiguration(accessToken);
+        const bulkActivitiesApi = new BulkActivitiesApi(configuration);
+        try {
+            const result = await bulkActivitiesApi.getActivityById(activityId);
+            return result.data.state!;
+        } catch (error) {
+            throw new Error("Failed to retrieve upload status");
         }
     }
 }
