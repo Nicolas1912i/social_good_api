@@ -19,4 +19,4 @@ import {GetUploadStatus} from "./domain/use-cases/contact/get-upload-status";
   server.use("/", contactMiddleWare)
   server.listen(4000, () => console.log("Running on http://localhost:4000"))
 
-})()
+})();

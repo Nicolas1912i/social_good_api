@@ -56,7 +56,7 @@ export default function ContactsRouter(
         } catch (error) {
             res.status(500).send({ message: "Error saving data", error: error });
         }
-    })
+    });
 
     return router;
 }
