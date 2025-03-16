@@ -70,7 +70,9 @@ export default function ContactsRouter(
       );
       res.status(200).send({ status: status });
     } catch (error) {
-      res.status(500).send({ message: "Error saving data", error: error });
+      res
+        .status(500)
+        .send({ message: "Error getting activity status", error: error });
     }
   });
 
