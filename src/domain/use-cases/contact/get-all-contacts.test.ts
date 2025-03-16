@@ -1,5 +1,5 @@
-import {GetAllContacts} from "./get-all-contacts";
-import {ContactRepository} from "../../interfaces/repositories/contact-repository";
+import { GetAllContacts } from "./get-all-contacts";
+import { ContactRepository } from "../../interfaces/repositories/contact-repository";
 
 describe("GetAllContacts", () => {
   let useCase: GetAllContacts;
@@ -10,14 +10,16 @@ describe("GetAllContacts", () => {
     mockRepository = {
       createCollection: jest.fn(),
       getContacts: jest.fn(),
-      getUploadStatus: jest.fn()
+      getUploadStatus: jest.fn(),
     };
     useCase = new GetAllContacts(mockRepository);
   });
 
   describe("execute", () => {
     it("should call repository getContacts method", async () => {
-      const mockContacts = [{ contact_id: "123", email_address: { address: "test@example.com" } }];
+      const mockContacts = [
+        { contact_id: "123", email_address: { address: "test@example.com" } },
+      ];
 
       mockRepository.getContacts.mockResolvedValue(mockContacts);
 

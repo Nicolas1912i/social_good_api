@@ -1,5 +1,5 @@
-import {ContactRepositoryImpl} from "./contact-repository";
-import {ContactDataSource} from "../../data/interfaces/data-sources/contact-data-source";
+import { ContactRepositoryImpl } from "./contact-repository";
+import { ContactDataSource } from "../../data/interfaces/data-sources/contact-data-source";
 
 describe("ContactRepositoryImpl", () => {
   let repository: ContactRepositoryImpl;
@@ -10,7 +10,7 @@ describe("ContactRepositoryImpl", () => {
     mockDataSource = {
       createCollection: jest.fn(),
       getAll: jest.fn(),
-      getUploadStatus: jest.fn()
+      getUploadStatus: jest.fn(),
     };
     repository = new ContactRepositoryImpl(mockDataSource);
   });
@@ -22,16 +22,24 @@ describe("ContactRepositoryImpl", () => {
 
       mockDataSource.createCollection.mockResolvedValue(mockActivityId);
 
-      const result = await repository.createCollection(mockContacts, mockAccessToken);
+      const result = await repository.createCollection(
+        mockContacts,
+        mockAccessToken,
+      );
 
-      expect(mockDataSource.createCollection).toHaveBeenCalledWith(mockContacts, mockAccessToken);
+      expect(mockDataSource.createCollection).toHaveBeenCalledWith(
+        mockContacts,
+        mockAccessToken,
+      );
       expect(result).toBe(mockActivityId);
     });
   });
 
   describe("getContacts", () => {
     it("should call data source getAll method", async () => {
-      const mockContacts = [{ contact_id: "123", email_address: { address: "test@example.com" } }];
+      const mockContacts = [
+        { contact_id: "123", email_address: { address: "test@example.com" } },
+      ];
 
       mockDataSource.getAll.mockResolvedValue(mockContacts);
 
@@ -49,9 +57,15 @@ describe("ContactRepositoryImpl", () => {
 
       mockDataSource.getUploadStatus.mockResolvedValue(mockStatus);
 
-      const result = await repository.getUploadStatus(mockAccessToken, mockActivityId);
+      const result = await repository.getUploadStatus(
+        mockAccessToken,
+        mockActivityId,
+      );
 
-      expect(mockDataSource.getUploadStatus).toHaveBeenCalledWith(mockAccessToken, mockActivityId);
+      expect(mockDataSource.getUploadStatus).toHaveBeenCalledWith(
+        mockAccessToken,
+        mockActivityId,
+      );
       expect(result).toBe(mockStatus);
     });
   });

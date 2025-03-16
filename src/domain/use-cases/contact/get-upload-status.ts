@@ -1,5 +1,5 @@
-import {GetUploadStatusUseCase} from "../../interfaces/use-cases/contact/get-upload-status";
-import {ContactRepository} from "../../interfaces/repositories/contact-repository";
+import { GetUploadStatusUseCase } from "../../interfaces/use-cases/contact/get-upload-status";
+import { ContactRepository } from "../../interfaces/repositories/contact-repository";
 
 export class GetUploadStatus implements GetUploadStatusUseCase {
   contactRepository: ContactRepository;
@@ -9,6 +9,9 @@ export class GetUploadStatus implements GetUploadStatusUseCase {
   }
 
   async execute(accessToken: string, activityId: string): Promise<string> {
-    return await this.contactRepository.getUploadStatus(accessToken, activityId);
+    return await this.contactRepository.getUploadStatus(
+      accessToken,
+      activityId,
+    );
   }
 }

@@ -1,5 +1,5 @@
-import {CreateContact} from "./create-contact";
-import {ContactRepository} from "../../interfaces/repositories/contact-repository";
+import { CreateContact } from "./create-contact";
+import { ContactRepository } from "../../interfaces/repositories/contact-repository";
 
 describe("CreateContact", () => {
   let useCase: CreateContact;
@@ -10,7 +10,7 @@ describe("CreateContact", () => {
     mockRepository = {
       createCollection: jest.fn(),
       getContacts: jest.fn(),
-      getUploadStatus: jest.fn()
+      getUploadStatus: jest.fn(),
     };
     useCase = new CreateContact(mockRepository);
   });
@@ -24,7 +24,10 @@ describe("CreateContact", () => {
 
       const result = await useCase.execute(mockContacts, mockAccessToken);
 
-      expect(mockRepository.createCollection).toHaveBeenCalledWith(mockContacts, mockAccessToken);
+      expect(mockRepository.createCollection).toHaveBeenCalledWith(
+        mockContacts,
+        mockAccessToken,
+      );
       expect(result).toBe(mockActivityId);
     });
   });

@@ -1,5 +1,5 @@
-import {GetUploadStatus} from "./get-upload-status";
-import {ContactRepository} from "../../interfaces/repositories/contact-repository";
+import { GetUploadStatus } from "./get-upload-status";
+import { ContactRepository } from "../../interfaces/repositories/contact-repository";
 
 describe("GetUploadStatus", () => {
   let useCase: GetUploadStatus;
@@ -10,7 +10,7 @@ describe("GetUploadStatus", () => {
     mockRepository = {
       createCollection: jest.fn(),
       getContacts: jest.fn(),
-      getUploadStatus: jest.fn()
+      getUploadStatus: jest.fn(),
     };
     useCase = new GetUploadStatus(mockRepository);
   });
@@ -24,7 +24,10 @@ describe("GetUploadStatus", () => {
 
       const result = await useCase.execute(mockAccessToken, mockActivityId);
 
-      expect(mockRepository.getUploadStatus).toHaveBeenCalledWith(mockAccessToken, mockActivityId);
+      expect(mockRepository.getUploadStatus).toHaveBeenCalledWith(
+        mockAccessToken,
+        mockActivityId,
+      );
       expect(result).toBe(mockStatus);
     });
   });
