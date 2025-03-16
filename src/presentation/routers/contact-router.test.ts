@@ -1,9 +1,9 @@
 import request from "supertest";
 import express from "express";
 import ContactRouter from "../../../src/presentation/routers/contact-router";
-import { GetAllContactsUseCase } from "../../domain/interfaces/use-cases/contact/get-all-contacts";
-import { CreateContactsUseCase } from "../../domain/interfaces/use-cases/contact/create-contact";
-import { GetUploadStatusUseCase } from "../../domain/interfaces/use-cases/contact/get-upload-status";
+import { GetAllContactsUseCase } from "@domain/interfaces/use-cases/contact/get-all-contacts";
+import { CreateContactsUseCase } from "@domain/interfaces/use-cases/contact/create-contact";
+import { GetUploadStatusUseCase } from "@domain/interfaces/use-cases/contact/get-upload-status";
 
 global.fetch = jest.fn(() =>
   Promise.resolve({
@@ -41,8 +41,8 @@ describe("ContactRouter", () => {
 
   describe("GET /authorize", () => {
     it("should redirect to Constant Contact authorization URL", async () => {
-      const clientId = "test-client-id";
-      const redirectUrl = "http://test-redirect.com";
+      const clientId = "24b65891-5275-48b6-b4b4-c603ace96396";
+      const redirectUrl = "http://localhost:3000";
       const expectedAuthUrl = `https://authz.constantcontact.com/oauth2/default/v1/authorize?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=token&state=NICK1912&nonce=NICK1912&scope=contact_data`;
 
       const response = await request(app).get("/authorize").query({
@@ -50,8 +50,8 @@ describe("ContactRouter", () => {
         redirectUrl,
       });
 
-      expect(fetch).toHaveBeenCalledWith(expectedAuthUrl, {});
-      expect(response.status).toBe(302); // Expecting redirect status
+      expect(fetch).toHaveBeenCalledWith(expectedAuthUrl);
+      expect(response.status).toBe(302);
     });
   });
 

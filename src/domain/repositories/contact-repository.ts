@@ -1,5 +1,5 @@
 import { ContactRepository } from "../interfaces/repositories/contact-repository";
-import { ContactDataSource } from "../../data/interfaces/data-sources/contact-data-source";
+import { ContactDataSource } from "@data/interfaces/data-sources/contact-data-source";
 import {
   CreateImportJSONActivityRequestImportDataInner,
   GetContactById200Response,

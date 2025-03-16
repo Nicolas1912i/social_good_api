@@ -1,5 +1,5 @@
 import { ContactRepositoryImpl } from "./contact-repository";
-import { ContactDataSource } from "../../data/interfaces/data-sources/contact-data-source";
+import { ContactDataSource } from "@data/interfaces/data-sources/contact-data-source";
 
 describe("ContactRepositoryImpl", () => {
   let repository: ContactRepositoryImpl;

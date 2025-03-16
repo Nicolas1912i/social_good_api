@@ -1,9 +1,9 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { GetAllContactsUseCase } from "../../domain/interfaces/use-cases/contact/get-all-contacts";
-import { CreateContactsUseCase } from "../../domain/interfaces/use-cases/contact/create-contact";
-import { GetUploadStatusUseCase } from "../../domain/interfaces/use-cases/contact/get-upload-status";
+import { GetAllContactsUseCase } from "@domain/interfaces/use-cases/contact/get-all-contacts";
+import { CreateContactsUseCase } from "@domain/interfaces/use-cases/contact/create-contact";
+import { GetUploadStatusUseCase } from "@domain/interfaces/use-cases/contact/get-upload-status";
 
 export default function ContactsRouter(
   getAllContactsUseCase: GetAllContactsUseCase,
