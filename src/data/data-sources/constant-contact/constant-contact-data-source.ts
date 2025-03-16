@@ -1,7 +1,7 @@
 import {ContactDataSource} from "../../interfaces/data-sources/contact-data-source";
 import {
     BulkActivitiesApi,
-    Configuration, ContactsApi,
+    Configuration, ContactListsApi, ContactsApi,
     CreateImportJSONActivityRequestImportDataInner, GetContactById200Response
 } from "ctct-api-client";
 
@@ -13,11 +13,14 @@ export class ConstantContactDataSource implements ContactDataSource {
 
     async createCollection(contact: Array<CreateImportJSONActivityRequestImportDataInner>, accessToken: string): Promise<string> {
         const configuration = this.getConfiguration(accessToken);
+        const contactListsApi = new ContactListsApi(configuration);
+        const contactListsResult = await contactListsApi.getAllLists();
+        const listIds = contactListsResult.data.lists!.map(x => x.list_id);
         const bulkActivitiesApi = new BulkActivitiesApi(configuration);
         try {
             const result = await bulkActivitiesApi.createImportJSONActivity({
                 import_data: contact,
-                list_ids: ["a2d739ee-fc29-11ef-bfc7-fa163ea51378"]
+                list_ids: listIds,
             });
             return result.data.activity_id!;
         } catch (error) {
