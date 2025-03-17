@@ -158,7 +158,10 @@ describe("ContactRouter", () => {
       });
 
       expect(response.status).toBe(500);
-      expect(response.body).toHaveProperty("message", "Error saving data");
+      expect(response.body).toHaveProperty(
+        "message",
+        "Error getting activity status",
+      );
       expect(response.body).toHaveProperty("error");
     });
   });

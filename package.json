@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --watchAll --collectCoverage",
-    "dev:build": "tsc",
-    "dev:serve": "nodemon -e js -w lib lib/main.js"
+    "build": "tsc",
+    "serve": "tsc && nodemon -e js -w lib lib/main.js"
   },
   "keywords": [],
   "author": "",
